@@ -8,6 +8,8 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <TextBlock x:Name="AATextBlock" Text="ALIEN ATTACK" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50" FontSize="50"/>
+        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click"/>
+        <Button x:Name="HSButton" Content="High Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="592,402,595,286" Click="HSButton_Click"/>
     </Grid>
 </Page>
