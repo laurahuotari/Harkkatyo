@@ -8,6 +8,7 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:Name="BackButton" Content="EXIT" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click"/>
+        <Canvas x:Name="MyCanvas" Background="Black"/>
+        <Button x:Name="BackButton" Content="EXIT" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" Foreground="#FFFB1414"/>
     </Grid>
 </Page>
