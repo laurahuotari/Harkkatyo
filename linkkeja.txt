@@ -1,0 +1,5 @@
+Löysin space shooter tutoriaaleja.
+Tehty eri ohjelmalla, mutta c#:lla.
+Vois löytyä jotain apuja.
+https://unity3d.com/learn/tutorials/projects/space-shooter-tutorial
+http://www.lessmilk.com/tutorial/space-shooter-unity-1
