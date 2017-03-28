@@ -12,4 +12,10 @@ namespace AlienAttackApp
         public int Score { get; set; }
         private List<Alien> aliens;
     }
+
+    //tarvitaanko  me joku tämmönen start game metodi?
+    public void StartGame()
+    {
+
+    }
 }
