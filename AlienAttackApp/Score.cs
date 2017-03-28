@@ -8,27 +8,23 @@ namespace AlienAttackApp
 {
     class Score
     {
-        int score = 0; //alkupisteet, pitäskö olla private tms?
+        private int score = 0; //alkupisteet
 
-        public void Scores()
+        public void CurrentScore()
         {
-            
+            PlayerScore.text = score;
         }
 
-        public void AddScore() //voiks näin sanoo? eli jos alieniin osuu, niin lisätään piste
+        public void AddScore() 
         {
-            if Alien.BeenHit(){
+            if alien.BeenHit(){     //voiks näin sanoo? eli jos alieniin osuu, niin lisätään piste
                 score++;
-            }
-            else
-            {
-
-            }
+            } 
         }
 
         public void Reset()
         {
-            
+            score = 0;
         }
     }
 }

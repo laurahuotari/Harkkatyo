@@ -23,5 +23,10 @@ namespace AlienAttackApp
         {
             this.InitializeComponent();
         }
+
+        public void BeenHit()
+        {
+
+        }
     }
 }

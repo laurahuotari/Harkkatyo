@@ -9,7 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Canvas x:Name="MyCanvas" Background="Black"/>
-        <TextBlock x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="20px" VerticalAlignment="Top" Margin="20" Foreground="#FFFB1414"></TextBlock>
+        <TextBox x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="20px" VerticalAlignment="Top" Margin="20" Foreground="#FFFB1414"></TextBox>
         <Button x:Name="BackButton" Content="EXIT" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" Foreground="#FFFB1414"/>
     </Grid>
 </Page>
