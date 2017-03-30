@@ -19,16 +19,71 @@ using Windows.UI.Xaml.Navigation;
 namespace AlienAttackApp
 {
     /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
+    /// Game page
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        //score at start
         private int Score = 0;
+        //list of aliens
         private List<Alien> aliens;
+        //player
         private Player player;
+        //left pressed
         private bool LeftPressed;
+        //right pressed
         private bool RightPressed;
+        //timer
         private DispatcherTimer timer;
+
+        public GamePage()
+        {
+            this.InitializeComponent();
+
+            //add player to location
+            player = new Player
+            {
+                LocationX = MyCanvas.Width/2,   //center of window
+                LocationY = MyCanvas.Height-60  //at the bottom of window
+            };
+
+            //add player to canvas
+            MyCanvas.Children.Add(player);
+
+            //player location set
+            player.SetLocation();
+
+            //listener if ket down
+            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+
+            //timer
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
+            timer.Tick += Timer_Tick;
+            timer.Start();
+        }
+
+        //timer
+        private void Timer_Tick(object sender, object e)
+        {
+            //siirrä ammuksia ja vihollisia
+        }
+
+        //buttons down
+        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        {
+            switch (args.VirtualKey)
+            {
+                case VirtualKey.Left:       //move left
+                    player.MoveLeft();
+                    break;
+                case VirtualKey.Right:      //move right
+                    player.MoveRight();
+                    break;
+                    //case VirtualKey.Space:    //space to shoot
+                    //bullet.Shoot();?
+            }
+        }
 
         /* Score
         public void CurrentScore()
@@ -43,56 +98,13 @@ namespace AlienAttackApp
             }
         }
 
-        public void Reset()
+        public void ResetScore()
         {
-            score = 0;
+            Score = 0;
         }
         */
 
-        public GamePage()
-        {
-            this.InitializeComponent();
-
-            //player location
-            player = new Player
-            {
-                LocationX = MyCanvas.Width/2,
-                LocationY = MyCanvas.Height-60
-            };
-
-            //add player to canvas
-            MyCanvas.Children.Add(player);
-            player.SetLocation();
-
-            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
-
-            timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
-            timer.Tick += Timer_Tick;
-            timer.Start();
-        }
-
-        private void Timer_Tick(object sender, object e)
-        {
-            //siirrä ammuksia ja vihollisia
-
-        }
-
-        //buttons down
-        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
-        {
-            switch (args.VirtualKey)
-            {
-                case VirtualKey.Left:
-                    player.MoveLeft();
-                    break;
-                case VirtualKey.Right:
-                    player.MoveRight();
-                    break;
-            }
-        }
-
-        //navigation
+        //navigation between pages
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
@@ -102,9 +114,5 @@ namespace AlienAttackApp
                 rootFrame.GoBack();
             }
         }
-
-        
-
-
     }
 }

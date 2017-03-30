@@ -35,11 +35,13 @@ namespace AlienAttackApp
             this.InitializeComponent();
         }
 
+        //movement
         public void Movement()
         {
 
         }
 
+        //been hit
         public void BeenHit()
         {
 
