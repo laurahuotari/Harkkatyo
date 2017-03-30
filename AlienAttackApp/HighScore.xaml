@@ -9,7 +9,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Canvas x:Name="MyCanvas" Background="Black"/>
-        <TextBlock x:Name="HSTextBlock" Text="High Score" VerticalAlignment="top" HorizontalAlignment="Center" FontSize="50" Margin="30" FocusVisualPrimaryBrush="#FF15BB0D" Foreground="#FF30BB22"/>
+        <TextBlock x:Name="HSTextBlock" Text="High Score" VerticalAlignment="top" HorizontalAlignment="Center" FontSize="50" Margin="30" Foreground="#FF30BB22"/>
         <Button x:Name="ExitButton" Content="EXIT" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="20" Click="ExitButton_Click" Foreground="#FFFD2300"/>
         
     </Grid>
