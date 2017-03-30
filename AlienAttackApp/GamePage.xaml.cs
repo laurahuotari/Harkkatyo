@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -23,9 +24,11 @@ namespace AlienAttackApp
     public sealed partial class GamePage : Page
     {
         private int Score = 0;
-
-        public string Player { get; set; }
         private List<Alien> aliens;
+        private Player player;
+        private bool LeftPressed;
+        private bool RightPressed;
+        private DispatcherTimer timer;
 
         /* Score
         public void CurrentScore()
@@ -50,10 +53,46 @@ namespace AlienAttackApp
         {
             this.InitializeComponent();
 
-            //create player
-            
+            //player location
+            player = new Player
+            {
+                LocationX = MyCanvas.Width/2,
+                LocationY = MyCanvas.Height-60
+            };
+
+            //add player to canvas
+            MyCanvas.Children.Add(player);
+            player.SetLocation();
+
+            Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+
+            timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
+            timer.Tick += Timer_Tick;
+            timer.Start();
         }
 
+        private void Timer_Tick(object sender, object e)
+        {
+            //siirrä ammuksia ja vihollisia
+
+        }
+
+        //buttons down
+        private void CoreWindow_KeyDown(Windows.UI.Core.CoreWindow sender, Windows.UI.Core.KeyEventArgs args)
+        {
+            switch (args.VirtualKey)
+            {
+                case VirtualKey.Left:
+                    player.MoveLeft();
+                    break;
+                case VirtualKey.Right:
+                    player.MoveRight();
+                    break;
+            }
+        }
+
+        //navigation
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
@@ -64,7 +103,7 @@ namespace AlienAttackApp
             }
         }
 
-
+        
 
 
     }

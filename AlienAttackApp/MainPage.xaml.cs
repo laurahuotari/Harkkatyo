@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,6 +29,13 @@ namespace AlienAttackApp
         public MainPage()
         {
             this.InitializeComponent();
+
+            //change default start up mode
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            // size 800*600
+            ApplicationView.PreferredLaunchViewSize = new Size(800, 600);
+            //disable debugger info
+            App.Current.DebugSettings.EnableFrameRateCounter = false;
 
         }
 

@@ -9,7 +9,9 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 
-    <Grid>
-
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Bottom">
+        <Image
+                Source="Assets/alus.png"
+                Width="60" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>
