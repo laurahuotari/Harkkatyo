@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Windows.System;
 using System.Collections.Generic;
-using System.IO;
+//using Windows.System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
@@ -19,9 +19,25 @@ namespace AlienAttackApp
 {
     public sealed partial class Alien : UserControl
     {
+        //health
+        public int Healt { get; set; }
+        //x location
+        public double LocationX { get; set; }
+        //y location
+        public double LocationY { get; set; }
+        //speed
+        private readonly double MaxSpeed = 10;
+        private double speed;
+
+
         public Alien()
         {
             this.InitializeComponent();
+        }
+
+        public void Movement()
+        {
+
         }
 
         public void BeenHit()

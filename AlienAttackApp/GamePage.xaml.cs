@@ -22,9 +22,36 @@ namespace AlienAttackApp
     /// </summary>
     public sealed partial class GamePage : Page
     {
+        private int Score = 0;
+
+        public string Player { get; set; }
+        private List<Alien> aliens;
+
+        /* Score
+        public void CurrentScore()
+        {
+            PlayerScore.text = score;
+        }
+
+        public void AddScore()
+        {
+            if alien.BeenHit(){     //voiks näin sanoo? eli jos alieniin osuu, niin lisätään piste
+                score++;
+            }
+        }
+
+        public void Reset()
+        {
+            score = 0;
+        }
+        */
+
         public GamePage()
         {
             this.InitializeComponent();
+
+            //create player
+            
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
