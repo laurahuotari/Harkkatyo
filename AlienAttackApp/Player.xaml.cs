@@ -19,25 +19,30 @@ namespace AlienAttackApp
 {
     public sealed partial class Player : UserControl
     {
+
+        private readonly double MaxLocationX = 800-70;
+        private readonly double MinLocationX = 10;
+        public double LocationX { get; set; }
+        public double LocationY { get; set; }
+
+
         public Player()
         {
             this.InitializeComponent();
         }
 
-        private readonly double MaxSpeed = 10;
-
-        private double speed;
-
-        public double LocationX { get; set; }
-
         public void MoveLeft()
         {
-
+            if (LocationX < MinLocationX) LocationX = MinLocationX;
+            LocationX -= 10;
+            SetLocation();
         }
 
         public void MoveRight()
         {
-
+            if (LocationX > MaxLocationX) LocationX = MaxLocationX;
+            LocationX += 10;
+            SetLocation();
         }
 
         public void Shoot()
@@ -48,6 +53,7 @@ namespace AlienAttackApp
         public void SetLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);
+            SetValue(Canvas.TopProperty, LocationY);
         }
 
     }

@@ -5,12 +5,14 @@
     xmlns:local="using:AlienAttackApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Width="800"
+    Height="600">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Canvas x:Name="MyCanvas" Background="Black"/>
-        <TextBlock x:Name="AATextBlock" Text="ALIEN ATTACK"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50" FontSize="50" Foreground="#FF3ECD27"/>
-        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click" Foreground="#FF29BD29"/>
+        <TextBlock x:Name="AATextBlock" Text="ALIEN ATTACK"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50" FontSize="50"  Foreground="#FF3ECD27"/>
+        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click"  Foreground="#FF29BD29"/>
         <Button x:Name="HSButton" Content="High Score" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="592,402,595,286" Click="HSButton_Click" Foreground="#FF18B211"/>
     </Grid>
 </Page>
