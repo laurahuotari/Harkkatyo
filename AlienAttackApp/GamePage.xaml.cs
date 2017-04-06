@@ -24,15 +24,17 @@ namespace AlienAttackApp
     public sealed partial class GamePage : Page
     {
         //score at start
-        private int Score = 0;
+        //private int Score = 0;
         //list of aliens
-        private List<Alien> aliens;
+        //private List<Alien> aliens;
         //player
         private Player player;
         //left pressed
-        private bool LeftPressed;
+        //private bool LeftPressed;
         //right pressed
-        private bool RightPressed;
+        //private bool RightPressed;
+        //space pressed
+        private bool SpacePressed;
         //timer
         private DispatcherTimer timer;
 
@@ -40,11 +42,20 @@ namespace AlienAttackApp
         {
             this.InitializeComponent();
 
+            /*Bullet bullet = new Bullet()
+            {
+                LocationX = player.LocationX + 30,
+                LocationY = player.LocationY + 30,
+            };
+            MyCanvas.Children.Add(bullet);
+
+            bullet.SetLocation();*/
+
             //add player to location
             player = new Player
             {
-                LocationX = MyCanvas.Width/2,   //center of window
-                LocationY = MyCanvas.Height-60  //at the bottom of window
+                LocationX = MyCanvas.Width / 2- 30,   //center of window
+                LocationY = MyCanvas.Height - 60  //at the bottom of window
             };
 
             //add player to canvas
@@ -61,12 +72,15 @@ namespace AlienAttackApp
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
+
         }
 
         //timer
         private void Timer_Tick(object sender, object e)
         {
             //siirrä ammuksia ja vihollisia
+            if (SpacePressed) player.Shoot();
+            //player.UpdateBullets();
         }
 
         //buttons down
@@ -80,8 +94,9 @@ namespace AlienAttackApp
                 case VirtualKey.Right:      //move right
                     player.MoveRight();
                     break;
-                    //case VirtualKey.Space:    //space to shoot
-                    //bullet.Shoot();?
+                    case VirtualKey.Space:    //space to shoot
+                    SpacePressed = true;
+                    break;
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+//using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -25,13 +26,19 @@ namespace AlienAttackApp
         private readonly double MinLocationX = 0+9;
         //x location
         public double LocationX { get; set; }
-        //y locayion
+        //y location
         public double LocationY { get; set; }
 
+        //time between shooting bullets
+        public int BulletInterval { get; set; }
+        //bullet list
+        public List<Bullet> bulletList;
 
         public Player()
         {
             this.InitializeComponent();
+            bulletList = new List<Bullet>();
+            BulletInterval = 20;
         }
 
         //move left
@@ -50,12 +57,7 @@ namespace AlienAttackApp
             SetLocation();
         }
 
-        //shoot
-        public void Shoot()
-        {
-
-        }
-
+       
         //location
         public void SetLocation()
         {
@@ -63,5 +65,58 @@ namespace AlienAttackApp
             SetValue(Canvas.TopProperty, LocationY);
         }
 
+        //shoot
+        public void Shoot()
+        {
+            Bullet bullet = new Bullet();
+
+            bullet.LocationX = LocationX;
+            bullet.LocationY = LocationY + 50;
+
+            bullet.IsVisible = true;
+
+            //shoot if bullet interval resets
+            /*if (BulletInterval >= 0)
+                BulletInterval--;
+
+             //if interval = 0, create new bullet and add to list
+            if (BulletInterval <= 0)
+            {
+                bullet.IsVisible = true;
+
+                if (bulletList.Count() < 20)
+                    bulletList.Add(bullet);
+            }
+
+            //reset interval
+            if (BulletInterval == 0)
+                BulletInterval = 20;
+        */
+        }
+
+        //Update
+        /*public void UpdateBullets()
+        {
+            //remove from list if hits top
+            foreach (Bullet b in bulletList)
+            {
+                //set movement
+                b.LocationY = b.LocationY - b.Speed;
+
+                //if hits top make invisible
+                if (b.LocationY <= 0)
+                    b.IsVisible = false;
+            }
+
+            //if invisible remove from list
+            for(int i = 0; i < bulletList.Count; i++)
+            {
+                if (!bulletList[i].IsVisible)
+                {
+                    bulletList.RemoveAt(i);
+                    i--;
+                }
+            }
+        }*/
     }
 }
