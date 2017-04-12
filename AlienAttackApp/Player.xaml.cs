@@ -21,9 +21,9 @@ namespace AlienAttackApp
     public sealed partial class Player : UserControl
     {
         //max x location
-        private readonly double MaxLocationX = 800-70;
+        private readonly double MaxLocationX = 800 - 70;
         //min x location
-        private readonly double MinLocationX = 0+9;
+        private readonly double MinLocationX = 0 + 9;
         //x location
         public double LocationX { get; set; }
         //y location
@@ -57,7 +57,7 @@ namespace AlienAttackApp
             SetLocation();
         }
 
-       
+
         //location
         public void SetLocation()
         {
@@ -68,55 +68,7 @@ namespace AlienAttackApp
         //shoot
         public void Shoot()
         {
-            Bullet bullet = new Bullet();
-
-            bullet.LocationX = LocationX;
-            bullet.LocationY = LocationY + 50;
-
-            bullet.IsVisible = true;
-
-            //shoot if bullet interval resets
-            /*if (BulletInterval >= 0)
-                BulletInterval--;
-
-             //if interval = 0, create new bullet and add to list
-            if (BulletInterval <= 0)
-            {
-                bullet.IsVisible = true;
-
-                if (bulletList.Count() < 20)
-                    bulletList.Add(bullet);
-            }
-
-            //reset interval
-            if (BulletInterval == 0)
-                BulletInterval = 20;
-        */
+            //liikuta luotia ylös päin
         }
-
-        //Update
-        /*public void UpdateBullets()
-        {
-            //remove from list if hits top
-            foreach (Bullet b in bulletList)
-            {
-                //set movement
-                b.LocationY = b.LocationY - b.Speed;
-
-                //if hits top make invisible
-                if (b.LocationY <= 0)
-                    b.IsVisible = false;
-            }
-
-            //if invisible remove from list
-            for(int i = 0; i < bulletList.Count; i++)
-            {
-                if (!bulletList[i].IsVisible)
-                {
-                    bulletList.RemoveAt(i);
-                    i--;
-                }
-            }
-        }*/
     }
 }

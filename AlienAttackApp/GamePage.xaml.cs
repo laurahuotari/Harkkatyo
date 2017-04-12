@@ -30,26 +30,19 @@ namespace AlienAttackApp
         //player
         private Player player;
         //left pressed
-        //private bool LeftPressed;
+        private bool LeftPressed;
         //right pressed
-        //private bool RightPressed;
+        private bool RightPressed;
         //space pressed
         private bool SpacePressed;
         //timer
         private DispatcherTimer timer;
+        //bullet list
+        private List<Bullet> bullets;
 
         public GamePage()
         {
             this.InitializeComponent();
-
-            /*Bullet bullet = new Bullet()
-            {
-                LocationX = player.LocationX + 30,
-                LocationY = player.LocationY + 30,
-            };
-            MyCanvas.Children.Add(bullet);
-
-            bullet.SetLocation();*/
 
             //add player to location
             player = new Player
@@ -80,7 +73,6 @@ namespace AlienAttackApp
         {
             //siirrä ammuksia ja vihollisia
             if (SpacePressed) player.Shoot();
-            //player.UpdateBullets();
         }
 
         //buttons down
@@ -95,7 +87,14 @@ namespace AlienAttackApp
                     player.MoveRight();
                     break;
                     case VirtualKey.Space:    //space to shoot
-                    SpacePressed = true;
+                    Bullet bullet = new Bullet()
+                    {
+                        LocationX = player.LocationX + 30,
+                        LocationY = player.LocationY + 30,
+                    };
+                    MyCanvas.Children.Add(bullet);
+
+                    bullet.SetLocation();
                     break;
             }
         }

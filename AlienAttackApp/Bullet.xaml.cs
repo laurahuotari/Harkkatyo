@@ -20,12 +20,6 @@ namespace AlienAttackApp
 {
     public sealed partial class Bullet : UserControl
     {
-        
-        public bool IsVisible { get; set; }
-        public float Speed { get; set; }
-        //public Vector2 origin;
-        //public double Position;
-
         //x location
         public double LocationX { get; set; }
         //y location
@@ -34,8 +28,13 @@ namespace AlienAttackApp
         public Bullet()
         {
             this.InitializeComponent();
-            //Speed = 10;
-            IsVisible = true;
+        }
+
+        //location
+        public void SetLocation()
+        {
+            SetValue(Canvas.LeftProperty, LocationX);
+            SetValue(Canvas.TopProperty, LocationY);
         }
     }
 }
