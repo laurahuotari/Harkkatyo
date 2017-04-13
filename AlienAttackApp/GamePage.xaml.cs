@@ -23,10 +23,6 @@ namespace AlienAttackApp
     /// </summary>
     public sealed partial class GamePage : Page
     {
-        //score at start
-        //private int Score = 0;
-        //list of aliens
-        private List<Alien> aliens;
         //player
         private Player player;
         //left pressed
@@ -39,6 +35,10 @@ namespace AlienAttackApp
         private DispatcherTimer timer;
         //bullet list
         private List<Bullet> bullets;
+        //alien list
+        private List<Alien> aliens;
+        //score at start
+        //private int Score = 0;
 
         public GamePage()
         {
@@ -57,24 +57,17 @@ namespace AlienAttackApp
             //player location set
             player.SetLocation();
 
-            //listener if ket down
+            //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
 
-
-
-            //timer
+            //game loop
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
 
-        }
-
-        //timer
-        private void Timer_Tick(object sender, object e)
-        {
-            //siirrä ammuksia ja vihollisia
-            if (SpacePressed) player.Shoot();
+            //init bullet list
+            bullets = new List<Bullet>();
         }
 
         //buttons down
@@ -82,22 +75,54 @@ namespace AlienAttackApp
         {
             switch (args.VirtualKey)
             {
-                case VirtualKey.Left:       //move left
+                case VirtualKey.Left:           //move left
                     player.MoveLeft();
                     break;
-                case VirtualKey.Right:      //move right
+                case VirtualKey.Right:          //move right
                     player.MoveRight();
                     break;
-                    case VirtualKey.Space:    //space to shoot
-                    Bullet bullet = new Bullet()
-                    {
-                        LocationX = player.LocationX + 30,
-                        LocationY = player.LocationY + 30,
-                    };
-                    MyCanvas.Children.Add(bullet);
-
-                    bullet.SetLocation();
+                case VirtualKey.Space:          //space to shoot
+                    SpacePressed = true;
                     break;
+            }
+        }
+
+        //timer
+        private void Timer_Tick(object sender, object e)
+        {
+            //siirrä ammuksia ja vihollisia
+            if (SpacePressed)
+            {
+                SpacePressed = false;
+                Bullet bullet = new Bullet()
+                {
+                    LocationX = player.LocationX + 30,
+                    LocationY = player.LocationY + 5,
+                };
+                MyCanvas.Children.Add(bullet);
+
+                bullet.SetLocation();
+                //add to list
+                bullets.Add(bullet);
+            }
+            foreach(Bullet bullet in bullets)
+            {
+                bullet.Shoot();
+                if(bullet.LocationY == -150)
+                {
+                    bullets.Remove(bullet);
+                }
+            }
+        }
+
+        //navigation between pages
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null) return;
+            if (rootFrame.CanGoBack)
+            {
+                rootFrame.GoBack();
             }
         }
 
@@ -119,16 +144,5 @@ namespace AlienAttackApp
             Score = 0;
         }
         */
-
-        //navigation between pages
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if (rootFrame == null) return;
-            if (rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
-        }
     }
 }

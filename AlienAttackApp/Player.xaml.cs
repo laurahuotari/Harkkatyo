@@ -57,18 +57,11 @@ namespace AlienAttackApp
             SetLocation();
         }
 
-
         //location
         public void SetLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);
             SetValue(Canvas.TopProperty, LocationY);
-        }
-
-        //shoot
-        public void Shoot()
-        {
-            //liikuta luotia ylös päin
         }
     }
 }

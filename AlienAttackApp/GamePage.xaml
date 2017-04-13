@@ -12,6 +12,6 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Canvas x:Name="MyCanvas" Background="Black" Height="600" Width="800" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="20px" VerticalAlignment="Top" Margin="20" Foreground="#FFFB1414"></TextBlock>
-        <Button x:Name="BackButton" Content="EXIT" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" Foreground="#FFFB1414"/>
+        <Button x:Name="BackButton" Content="BACK" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" Foreground="#FFFB1414"/>
     </Grid>
 </Page>
