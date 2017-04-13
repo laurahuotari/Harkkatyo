@@ -12,6 +12,6 @@
     <Grid>
         <Image
                 Source="Assets/alien.png"
-                Width="20"/>
+                Height="40"/>
     </Grid>
 </UserControl>

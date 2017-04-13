@@ -19,52 +19,29 @@ using System;
 namespace AlienAttackApp
 {
     public sealed partial class Alien : UserControl
-    {
-        //timer
-        private DispatcherTimer timer;
-
-        //health
-        public int Healt { get; set; }
+    {   
         //x location
         public double LocationX { get; set; }
         //y location
         public double LocationY { get; set; }
-        //speed
-        private readonly double MaxSpeed = 10;
-        private double speed;
-
-
+               
         public Alien()
         {
             this.InitializeComponent();
-
-            timer = new DispatcherTimer();
-
-            timer.Tick += Timer_tick;
-            timer.Start();
            
         }
-
-        private void Timer_tick(object sender, object e)
+        public void SetLocation()
         {
-            Alien alien = new Alien();
-
+            SetValue(Canvas.LeftProperty, LocationX);
+            SetValue(Canvas.TopProperty, LocationY);
         }
-
-
-
+        
         //movement
-        public void Movement()
+        public void Move()
         {
-            if (speed > MaxSpeed) speed = MaxSpeed;
-
-
-        }
-
-        //been hit
-        public void BeenHit()
-        {
-
+            //move alien down
+            LocationY += 5;
+            SetLocation();
         }
     }
 }
