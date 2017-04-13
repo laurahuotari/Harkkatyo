@@ -122,6 +122,7 @@
     <None Include="AlienAttackApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\alien.png" />
     <Content Include="Assets\alus.png" />
     <Content Include="Assets\Ship.png" />
     <Content Include="Properties\Default.rd.xml" />
