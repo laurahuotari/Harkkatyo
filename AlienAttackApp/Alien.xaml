@@ -10,6 +10,8 @@
     d:DesignWidth="400">
 
     <Grid>
-
+        <Image
+                Source="Assets/alien.png"
+                Width="20"/>
     </Grid>
 </UserControl>

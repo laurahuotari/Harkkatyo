@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using System;
 
 // The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -19,6 +20,9 @@ namespace AlienAttackApp
 {
     public sealed partial class Alien : UserControl
     {
+        //timer
+        private DispatcherTimer timer;
+
         //health
         public int Healt { get; set; }
         //x location
@@ -33,11 +37,27 @@ namespace AlienAttackApp
         public Alien()
         {
             this.InitializeComponent();
+
+            timer = new DispatcherTimer();
+
+            timer.Tick += Timer_tick;
+            timer.Start();
+           
         }
+
+        private void Timer_tick(object sender, object e)
+        {
+            Alien alien = new Alien();
+
+        }
+
+
 
         //movement
         public void Movement()
         {
+            if (speed > MaxSpeed) speed = MaxSpeed;
+
 
         }
 

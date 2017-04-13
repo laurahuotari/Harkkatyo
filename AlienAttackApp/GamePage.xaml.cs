@@ -26,7 +26,7 @@ namespace AlienAttackApp
         //score at start
         //private int Score = 0;
         //list of aliens
-        //private List<Alien> aliens;
+        private List<Alien> aliens;
         //player
         private Player player;
         //left pressed
@@ -59,6 +59,8 @@ namespace AlienAttackApp
 
             //listener if ket down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
+
+
 
             //timer
             timer = new DispatcherTimer();
