@@ -40,11 +40,13 @@ namespace AlienAttackApp
         //alien list
         private List<Alien> aliens;
         //score at start
-        //private int Score = 0;
+        private int Score = 0;
+        private int HitCount = 0;
 
         public GamePage()
         {
             this.InitializeComponent();
+
             //init alien list
             aliens = new List<Alien>();
             //init bullet list
@@ -60,15 +62,28 @@ namespace AlienAttackApp
             //add player to canvas
             MyCanvas.Children.Add(player);
 
+
+            Random r = new Random();
+            int x = r.Next(0, 770);
+
+            Alien alien = new Alien()
+            {
+                LocationX = x,
+                LocationY = MyCanvas.Height - 640
+            };
+            //SetLocation
+            alien.SetLocation();
+
+            //Add alien
+            aliens.Add(alien);
+
+            MyCanvas.Children.Add(alien);
+
             //player location set
             player.SetLocation();
 
-            // Alien loop
-            alientimer = new DispatcherTimer();
-            alientimer.Interval = new TimeSpan(0, 0, 0, 0, 2);
-            alientimer.Tick += AlienTimer_Tick;
-            timer.Start();
-
+            //add score
+            AddScore();
 
             //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -77,8 +92,14 @@ namespace AlienAttackApp
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
-            timer.Start();           
-                        
+            timer.Start();
+
+            //alien loop
+            alientimer = new DispatcherTimer();
+            alientimer.Interval = new TimeSpan(0, 0, 0, 2);
+            alientimer.Tick += AlienTimer_Tick;
+            alientimer.Start();
+
         }
 
         //buttons down
@@ -99,9 +120,12 @@ namespace AlienAttackApp
                         LocationX = player.LocationX + 30,
                         LocationY = player.LocationY + 5,
                     };
+                    //add bullet to canvas
                     MyCanvas.Children.Add(bullet);
 
+                    //set bullet location
                     bullet.SetLocation();
+
                     //add to list
                     bullets.Add(bullet);
                     break;
@@ -126,22 +150,22 @@ namespace AlienAttackApp
             {
                 alien.Move();
             }
-            
 
            CheckCollision();
         }
 
+        //alien timer
         private void AlienTimer_Tick(object sender, object e)
         {
-            
-          //EI TOIMI, PITÄÄKÖ OLLA LOOP?
+            //EI TOIMI, PITÄÄKÖ OLLA LOOP?
+
                 Random r = new Random();
                 int x = r.Next(0, 770);
 
                 Alien alien = new Alien()
                 {
                     LocationX = x,
-                    LocationY = MyCanvas.Height - 640
+                    LocationY = -60
                 };
                 //SetLocation
                 alien.SetLocation();
@@ -149,12 +173,10 @@ namespace AlienAttackApp
                 //Add alien
                 aliens.Add(alien);
 
+                //add alien to canvas
                 MyCanvas.Children.Add(alien);
             
         }
-
-
-
 
         //Check collision
         private void CheckCollision()
@@ -176,10 +198,23 @@ namespace AlienAttackApp
                         MyCanvas.Children.Remove(bullet);
                         aliens.Remove(alien);
                         bullets.Remove(bullet);
+                        HitCount++;
+                        if (HitCount == 5)
+                        {
+                            alientimer.Interval = new TimeSpan(0, 0, 0, 1, 500);
+                        }if(HitCount == 10)
+                        {
+                            alientimer.Interval = new TimeSpan(0, 0, 0, 1);
+                        }if(HitCount == 15)
+                        {
+                            alientimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
+                        }
+                        AddScore();
                         return;
                     }
                 }
             }
+            
         }
 
         //navigation between pages
@@ -193,23 +228,18 @@ namespace AlienAttackApp
             }
         }
 
-        /* Score
-        public void CurrentScore()
-        {
-            PlayerScore.text = score;
-        }
-
+        //Score
         public void AddScore()
         {
-            if alien.BeenHit(){     //voiks näin sanoo? eli jos alieniin osuu, niin lisätään piste
-                score++;
-            }
-        }
+            int value = int.Parse(PlayerScore.Text);
 
-        public void ResetScore()
-        {
-            Score = 0;
+            if (HitCount>0)
+            {
+                value++;
+            }
+
+            PlayerScore.Text = value.ToString();
         }
-        */
+       
     }
 }
