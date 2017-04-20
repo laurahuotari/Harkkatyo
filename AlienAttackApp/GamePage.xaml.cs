@@ -33,8 +33,10 @@ namespace AlienAttackApp
         private bool SpacePressed;
         //timer
         private DispatcherTimer timer;
+        //alien timer
+        private DispatcherTimer alientimer;
         //bullet list
-        private List<Bullet> bullets;
+        private List<Bullet> bullets;                
         //alien list
         private List<Alien> aliens;
         //score at start
@@ -43,6 +45,10 @@ namespace AlienAttackApp
         public GamePage()
         {
             this.InitializeComponent();
+            //init alien list
+            aliens = new List<Alien>();
+            //init bullet list
+            bullets = new List<Bullet>();
 
             //add player to location
             player = new Player
@@ -57,6 +63,13 @@ namespace AlienAttackApp
             //player location set
             player.SetLocation();
 
+            // Alien loop
+            alientimer = new DispatcherTimer();
+            alientimer.Interval = new TimeSpan(0, 0, 0, 0, 2);
+            alientimer.Tick += AlienTimer_Tick;
+            timer.Start();
+
+
             //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
 
@@ -64,10 +77,8 @@ namespace AlienAttackApp
             timer = new DispatcherTimer();
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
-            timer.Start();
-
-            //init bullet list
-            bullets = new List<Bullet>();
+            timer.Start();           
+                        
         }
 
         //buttons down
@@ -82,7 +93,17 @@ namespace AlienAttackApp
                     player.MoveRight();
                     break;
                 case VirtualKey.Space:          //space to shoot
-                    SpacePressed = true;
+                    SpacePressed = false;
+                    Bullet bullet = new Bullet()
+                    {
+                        LocationX = player.LocationX + 30,
+                        LocationY = player.LocationY + 5,
+                    };
+                    MyCanvas.Children.Add(bullet);
+
+                    bullet.SetLocation();
+                    //add to list
+                    bullets.Add(bullet);
                     break;
             }
         }
@@ -91,26 +112,72 @@ namespace AlienAttackApp
         private void Timer_Tick(object sender, object e)
         {
             //siirrä ammuksia ja vihollisia
-            if (SpacePressed)
-            {
-                SpacePressed = false;
-                Bullet bullet = new Bullet()
-                {
-                    LocationX = player.LocationX + 30,
-                    LocationY = player.LocationY + 5,
-                };
-                MyCanvas.Children.Add(bullet);
-
-                bullet.SetLocation();
-                //add to list
-                bullets.Add(bullet);
-            }
             foreach(Bullet bullet in bullets)
             {
                 bullet.Shoot();
                 if(bullet.LocationY == 0)
                 {
+                    MyCanvas.Children.Remove(bullet);
                     bullets.Remove(bullet);
+                }
+            }           
+              
+            foreach(Alien alien in aliens)
+            {
+                alien.Move();
+            }
+            
+
+           CheckCollision();
+        }
+
+        private void AlienTimer_Tick(object sender, object e)
+        {
+            
+          //EI TOIMI, PITÄÄKÖ OLLA LOOP?
+                Random r = new Random();
+                int x = r.Next(0, 770);
+
+                Alien alien = new Alien()
+                {
+                    LocationX = x,
+                    LocationY = MyCanvas.Height - 640
+                };
+                //SetLocation
+                alien.SetLocation();
+
+                //Add alien
+                aliens.Add(alien);
+
+                MyCanvas.Children.Add(alien);
+            
+        }
+
+
+
+
+        //Check collision
+        private void CheckCollision()
+        {
+            // Loop aliens list
+            foreach(Alien alien in aliens)
+            {
+                foreach (Bullet bullet in bullets)
+                {
+
+                    Rect ARect = new Rect(alien.LocationX, alien.LocationY, alien.ActualWidth, alien.ActualHeight);
+                    Rect BRect = new Rect(bullet.LocationX, bullet.LocationY, bullet.ActualWidth, bullet.ActualHeight);
+
+                    //Does objects intersects
+                    BRect.Intersect(ARect);
+                    if (!BRect.IsEmpty)
+                    {
+                        MyCanvas.Children.Remove(alien);
+                        MyCanvas.Children.Remove(bullet);
+                        aliens.Remove(alien);
+                        bullets.Remove(bullet);
+                        return;
+                    }
                 }
             }
         }
