@@ -36,12 +36,13 @@ namespace AlienAttackApp
         //alien timer
         private DispatcherTimer alientimer;
         //bullet list
-        private List<Bullet> bullets;                
+        private List<Bullet> bullets;
         //alien list
         private List<Alien> aliens;
-        //score at start
-        private int Score = 0;
+        //hit count
         private int HitCount = 0;
+        //game over
+        private GameOver gameover;
 
         public GamePage()
         {
@@ -93,7 +94,7 @@ namespace AlienAttackApp
             timer.Interval = new TimeSpan(0, 0, 0, 0, 1000 / 60);
             timer.Tick += Timer_Tick;
             timer.Start();
-
+            
             //alien loop
             alientimer = new DispatcherTimer();
             alientimer.Interval = new TimeSpan(0, 0, 0, 2);
@@ -138,8 +139,10 @@ namespace AlienAttackApp
             //siirrä ammuksia ja vihollisia
             foreach(Bullet bullet in bullets)
             {
+                //shoot bullet
                 bullet.Shoot();
-                if(bullet.LocationY == 0)
+                //remove from list and canvas if hits top
+                if(bullet.LocationY == 50)
                 {
                     MyCanvas.Children.Remove(bullet);
                     bullets.Remove(bullet);
@@ -148,7 +151,14 @@ namespace AlienAttackApp
               
             foreach(Alien alien in aliens)
             {
+                //move alien
                 alien.Move();
+                //remove from list and canvas if hits bottom
+                /*if (alien.LocationY == 600)
+                {
+                    MyCanvas.Children.Remove(alien);
+                    aliens.Remove(alien);
+                }*/
             }
 
            CheckCollision();
@@ -157,8 +167,6 @@ namespace AlienAttackApp
         //alien timer
         private void AlienTimer_Tick(object sender, object e)
         {
-            //EI TOIMI, PITÄÄKÖ OLLA LOOP?
-
                 Random r = new Random();
                 int x = r.Next(0, 770);
 
@@ -181,13 +189,13 @@ namespace AlienAttackApp
         //Check collision
         private void CheckCollision()
         {
-            // Loop aliens list
-            foreach(Alien alien in aliens)
+            foreach (Alien alien in aliens)
             {
+                Rect ARect = new Rect(alien.LocationX, alien.LocationY, alien.ActualWidth, alien.ActualHeight);
                 foreach (Bullet bullet in bullets)
-                {
+                    {
 
-                    Rect ARect = new Rect(alien.LocationX, alien.LocationY, alien.ActualWidth, alien.ActualHeight);
+                    
                     Rect BRect = new Rect(bullet.LocationX, bullet.LocationY, bullet.ActualWidth, bullet.ActualHeight);
 
                     //Does objects intersects
@@ -212,9 +220,17 @@ namespace AlienAttackApp
                         AddScore();
                         return;
                     }
+
+                }
+                   
+                Rect PRect = new Rect(player.LocationX, player.LocationY, player.ActualWidth, player.ActualHeight);
+
+                ARect.Intersect(PRect);
+                if (!ARect.IsEmpty)
+                {
+                    StopGame();
                 }
             }
-            
         }
 
         //navigation between pages
@@ -239,6 +255,21 @@ namespace AlienAttackApp
             }
 
             PlayerScore.Text = value.ToString();
+        }
+
+        public void StopGame()
+        {
+            timer.Stop();
+            alientimer.Stop();
+            gameover = new GameOver()
+            {
+                LocationX = MyCanvas.Width-600,
+                LocationY = MyCanvas.Height-450
+            };
+
+            gameover.SetLocation();
+
+            MyCanvas.Children.Add(gameover);
         }
        
     }

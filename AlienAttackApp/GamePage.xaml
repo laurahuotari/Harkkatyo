@@ -11,8 +11,8 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Canvas x:Name="MyCanvas" Background="Black" Height="600" Width="800" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Center" Width="50px" Height="20px" VerticalAlignment="Top" Margin="346,20,404,0" Foreground="#FFFB1414" Text="Score:" TextAlignment="Center" TextWrapping="Wrap" FocusVisualPrimaryBrush="{x:Null}"></TextBlock>
-        <TextBlock x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="20px" VerticalAlignment="Top" Margin="396,20,354,0" Foreground="#FFFB1414" Text="0" TextAlignment="Center" TextWrapping="Wrap"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Width="60px" Height="30px" VerticalAlignment="Top" Margin="363,20,387,0" Foreground="#FFFB1414" Text="Score:" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"></TextBlock>
+        <TextBlock x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="30px" VerticalAlignment="Top" Margin="401,20,349,0" Foreground="#FFFB1414" Text="0" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"></TextBlock>
         <Button x:Name="BackButton" Content="BACK" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" Foreground="#FFFB1414"/>
     </Grid>
 </Page>

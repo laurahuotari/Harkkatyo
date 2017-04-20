@@ -101,6 +101,9 @@
     <Compile Include="Bullet.xaml.cs">
       <DependentUpon>Bullet.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GameOver.xaml.cs">
+      <DependentUpon>GameOver.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Bullet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="GameOver.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
