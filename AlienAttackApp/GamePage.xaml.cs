@@ -108,7 +108,7 @@ namespace AlienAttackApp
             foreach(Bullet bullet in bullets)
             {
                 bullet.Shoot();
-                if(bullet.LocationY == -150)
+                if(bullet.LocationY == 0)
                 {
                     bullets.Remove(bullet);
                 }
