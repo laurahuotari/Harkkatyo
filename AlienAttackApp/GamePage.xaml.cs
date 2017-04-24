@@ -151,10 +151,11 @@ namespace AlienAttackApp
                 //shoot bullet
                 bullet.Shoot();
                 //remove from list and canvas if hits top
-                if(bullet.LocationY == 50)
+                if(bullet.LocationY <= 0)
                 {
                     MyCanvas.Children.Remove(bullet);
                     bullets.Remove(bullet);
+                    break;
                 }
             }           
               
@@ -163,11 +164,12 @@ namespace AlienAttackApp
                 //move alien
                 alien.Move();
                 //remove from list and canvas if hits bottom
-                /*if (alien.LocationY == 600)
+                if (alien.LocationY >= 600)
                 {
                     MyCanvas.Children.Remove(alien);
                     aliens.Remove(alien);
-                }*/
+                    break;
+                }
             }
 
            CheckCollision();
@@ -293,6 +295,7 @@ namespace AlienAttackApp
             gameover.SetLocation();
 
             MyCanvas.Children.Add(gameover);
+            Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
         }
        
     }
