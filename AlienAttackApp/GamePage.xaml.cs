@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -43,6 +44,8 @@ namespace AlienAttackApp
         private int HitCount = 0;
         //game over
         private GameOver gameover;
+        //audio
+        private MediaElement mediaElement;
 
         public GamePage()
         {
@@ -85,6 +88,9 @@ namespace AlienAttackApp
 
             //add score
             AddScore();
+
+            //load audio
+            LoadAudio();
 
             //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -129,6 +135,9 @@ namespace AlienAttackApp
 
                     //add to list
                     bullets.Add(bullet);
+
+                    //play audio
+                    mediaElement.Play();
                     break;
             }
         }
@@ -255,6 +264,20 @@ namespace AlienAttackApp
             }
 
             PlayerScore.Text = value.ToString();
+        }
+
+        //play audion when shooting
+        private async void LoadAudio()
+        {
+            StorageFolder folder =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile file =
+                await folder.GetFileAsync("pew.wav");
+            var stream = await file.OpenAsync(FileAccessMode.Read);
+
+            mediaElement = new MediaElement();
+            mediaElement.AutoPlay = false;
+            mediaElement.SetSource(stream, file.ContentType);
         }
 
         public void StopGame()
