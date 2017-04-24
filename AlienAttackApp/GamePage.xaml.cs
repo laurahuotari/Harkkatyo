@@ -26,10 +26,6 @@ namespace AlienAttackApp
     {
         //player
         private Player player;
-        //left pressed
-        private bool LeftPressed;
-        //right pressed
-        private bool RightPressed;
         //space pressed
         private bool SpacePressed;
         //timer
@@ -71,6 +67,7 @@ namespace AlienAttackApp
             //player location set
             player.SetLocation();
 
+            //random x location
             Random r = new Random();
             int x = r.Next(0, 770);
 
@@ -91,10 +88,10 @@ namespace AlienAttackApp
             //add score
             AddScore();
 
-            //load audio
-            LoadAudio();
+            //load audio Pew
+            LoadAudioPew();
 
-            //load audio
+            //load audio Splat
             LoadAudioSplat();
 
             //listener if key down
@@ -141,7 +138,7 @@ namespace AlienAttackApp
                     //add to list
                     bullets.Add(bullet);
 
-                    //play audio
+                    //play pew audio
                     mediaElement.Play();
                     break;
             }
@@ -150,7 +147,7 @@ namespace AlienAttackApp
         //game timer
         private void Timer_Tick(object sender, object e)
         {
-            //siirrä ammuksia ja vihollisia
+            //move bullets
             foreach(Bullet bullet in bullets)
             {
                 //shoot bullet
@@ -163,7 +160,8 @@ namespace AlienAttackApp
                     break;
                 }
             }           
-              
+            
+            //move aliens  
             foreach(Alien alien in aliens)
             {
                 //move alien
@@ -202,7 +200,7 @@ namespace AlienAttackApp
             
         }
 
-        //Check collision
+        //check collision
         private void CheckCollision()
         {
             foreach (Alien alien in aliens)
@@ -214,7 +212,7 @@ namespace AlienAttackApp
                     
                     Rect BRect = new Rect(bullet.LocationX, bullet.LocationY, bullet.ActualWidth, bullet.ActualHeight);
 
-                    //Do objects intersect
+                    //do objects intersect
                     BRect.Intersect(ARect);
                     if (!BRect.IsEmpty)
                     {
@@ -265,7 +263,7 @@ namespace AlienAttackApp
             }
         }
 
-        //Score
+        //score
         public void AddScore()
         {
             int value = int.Parse(PlayerScore.Text);
@@ -279,7 +277,7 @@ namespace AlienAttackApp
         }
 
         //play audio when shooting
-        private async void LoadAudio()
+        private async void LoadAudioPew()
         {
             StorageFolder folder =
                 await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -292,6 +290,7 @@ namespace AlienAttackApp
             mediaElement.SetSource(stream, file.ContentType);
         }
 
+        //play audio when alien dies
         private async void LoadAudioSplat()
         {
             StorageFolder folderSplat =
@@ -321,6 +320,10 @@ namespace AlienAttackApp
             MyCanvas.Children.Add(gameover);
             Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
         }
-       
+
+        private void empty_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

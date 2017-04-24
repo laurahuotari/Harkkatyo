@@ -63,5 +63,10 @@ namespace AlienAttackApp
             SetValue(Canvas.LeftProperty, LocationX);
             SetValue(Canvas.TopProperty, LocationY);
         }
+
+        internal void Focus()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
