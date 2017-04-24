@@ -46,6 +46,8 @@ namespace AlienAttackApp
         private GameOver gameover;
         //audio
         private MediaElement mediaElement;
+        //audio
+        private MediaElement mediaElementSplat;
 
         public GamePage()
         {
@@ -66,6 +68,8 @@ namespace AlienAttackApp
             //add player to canvas
             MyCanvas.Children.Add(player);
 
+            //player location set
+            player.SetLocation();
 
             Random r = new Random();
             int x = r.Next(0, 770);
@@ -81,16 +85,17 @@ namespace AlienAttackApp
             //Add alien
             aliens.Add(alien);
 
-            MyCanvas.Children.Add(alien);
-
-            //player location set
-            player.SetLocation();
+            //add alien to canvas
+            MyCanvas.Children.Add(alien);    
 
             //add score
             AddScore();
 
             //load audio
             LoadAudio();
+
+            //load audio
+            LoadAudioSplat();
 
             //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -142,7 +147,7 @@ namespace AlienAttackApp
             }
         }
 
-        //timer
+        //game timer
         private void Timer_Tick(object sender, object e)
         {
             //siirrä ammuksia ja vihollisia
@@ -209,7 +214,7 @@ namespace AlienAttackApp
                     
                     Rect BRect = new Rect(bullet.LocationX, bullet.LocationY, bullet.ActualWidth, bullet.ActualHeight);
 
-                    //Does objects intersects
+                    //Do objects intersect
                     BRect.Intersect(ARect);
                     if (!BRect.IsEmpty)
                     {
@@ -228,8 +233,13 @@ namespace AlienAttackApp
                         {
                             alientimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
                         }
+                        if (HitCount == 20)
+                        {
+                            alientimer.Interval = new TimeSpan(0, 0, 0, 0, 250);
+                        }
                         AddScore();
-                        return;
+                        mediaElementSplat.Play();
+                        return; 
                     }
 
                 }
@@ -268,7 +278,7 @@ namespace AlienAttackApp
             PlayerScore.Text = value.ToString();
         }
 
-        //play audion when shooting
+        //play audio when shooting
         private async void LoadAudio()
         {
             StorageFolder folder =
@@ -282,6 +292,20 @@ namespace AlienAttackApp
             mediaElement.SetSource(stream, file.ContentType);
         }
 
+        private async void LoadAudioSplat()
+        {
+            StorageFolder folderSplat =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile fileSplat =
+                await folderSplat.GetFileAsync("splat.wav");
+            var streamSplat = await fileSplat.OpenAsync(FileAccessMode.Read);
+
+            mediaElementSplat = new MediaElement();
+            mediaElementSplat.AutoPlay = false;
+            mediaElementSplat.SetSource(streamSplat, fileSplat.ContentType);
+        }
+
+        //game over
         public void StopGame()
         {
             timer.Stop();

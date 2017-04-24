@@ -128,7 +128,7 @@
     <Content Include="Assets\pew.wav" />
     <Content Include="Assets\alien.png" />
     <Content Include="Assets\alus.png" />
-    <Content Include="Assets\Ship.png" />
+    <Content Include="Assets\splat.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
