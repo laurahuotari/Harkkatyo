@@ -46,7 +46,9 @@ namespace AlienAttackApp
         private MediaElement mediaElementSplat;
         //game over audio
         private MediaElement mediaElementGameOver;
-        
+        //music
+        private MediaElement mediaElementMusic;
+
 
         public GamePage()
         {
@@ -100,7 +102,8 @@ namespace AlienAttackApp
             //load audio game over
             LoadAudioGameOver();
 
-            
+            //load music
+            LoadAudioMusic();
 
             //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -328,7 +331,8 @@ namespace AlienAttackApp
             mediaElementGameOver.SetSource(streamGameOver, fileGameOver.ContentType);
         }
 
-       /* private async void LoadAudioMusic()
+        //background music
+        private async void LoadAudioMusic()
         {
             StorageFolder folderMusic =
                 await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
@@ -339,7 +343,8 @@ namespace AlienAttackApp
             mediaElementMusic = new MediaElement();
             mediaElementMusic.IsLooping = true;
             mediaElementMusic.SetSource(streamMusic, fileMusic.ContentType);
-        }*/
+        }
+
 
         //game over. Screen freeze, Game Over text and Game Over sound.
         public void StopGame()
@@ -357,6 +362,7 @@ namespace AlienAttackApp
             MyCanvas.Children.Add(gameover);
             Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
             mediaElementGameOver.Play();
+            mediaElementMusic.Stop();
         }
 
         private void empty_Click(object sender, RoutedEventArgs e)

@@ -25,8 +25,7 @@ namespace AlienAttackApp
     public sealed partial class MainPage : Page
     {
 
-        //music
-        private MediaElement mediaElementMusic;
+        
 
         public MainPage()
         {
@@ -38,9 +37,7 @@ namespace AlienAttackApp
             ApplicationView.PreferredLaunchViewSize = new Size(800, 600);
             //disable debugger info
             App.Current.DebugSettings.EnableFrameRateCounter = false;
-
-            //load music
-            LoadAudioMusic();
+ 
 
         }
 
@@ -49,19 +46,6 @@ namespace AlienAttackApp
             Frame.Navigate(typeof(GamePage));
         }
 
-        private async void LoadAudioMusic()
-        {
-            StorageFolder folderMusic =
-                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
-            StorageFile fileMusic =
-                await folderMusic.GetFileAsync("space.wav");
-            var streamMusic = await fileMusic.OpenAsync(FileAccessMode.Read);
-
-            mediaElementMusic = new MediaElement();
-            mediaElementMusic.IsLooping = true;
-            mediaElementMusic.SetSource(streamMusic, fileMusic.ContentType);
-        }
-        //repeat when over;
 
     }
 }
