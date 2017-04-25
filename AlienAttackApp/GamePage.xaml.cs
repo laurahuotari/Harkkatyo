@@ -26,7 +26,7 @@ namespace AlienAttackApp
     {
         //player
         private Player player;
-        //space pressed
+        //spacepressed
         private bool SpacePressed;
         //timer
         private DispatcherTimer timer;
@@ -44,6 +44,9 @@ namespace AlienAttackApp
         private MediaElement mediaElement;
         //audio
         private MediaElement mediaElementSplat;
+        //game over audio
+        private MediaElement mediaElementGameOver;
+        
 
         public GamePage()
         {
@@ -93,6 +96,11 @@ namespace AlienAttackApp
 
             //load audio Splat
             LoadAudioSplat();
+
+            //load audio game over
+            LoadAudioGameOver();
+
+            
 
             //listener if key down
             Window.Current.CoreWindow.KeyDown += CoreWindow_KeyDown;
@@ -180,7 +188,8 @@ namespace AlienAttackApp
 
         //alien timer
         private void AlienTimer_Tick(object sender, object e)
-        {
+        {       
+                //random x location for alien
                 Random r = new Random();
                 int x = r.Next(0, 770);
 
@@ -263,14 +272,14 @@ namespace AlienAttackApp
             }
         }
 
-        //score
+        //score 
         public void AddScore()
         {
             int value = int.Parse(PlayerScore.Text);
 
             if (HitCount>0)
             {
-                value++;
+                value++; // adds points to the score
             }
 
             PlayerScore.Text = value.ToString();
@@ -304,7 +313,35 @@ namespace AlienAttackApp
             mediaElementSplat.SetSource(streamSplat, fileSplat.ContentType);
         }
 
-        //game over
+        //play audio when game over
+
+       private async void LoadAudioGameOver()
+        {
+            StorageFolder folderGameOver =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile fileGameOver =
+                await folderGameOver.GetFileAsync("GameOver.wav");
+            var streamGameOver = await fileGameOver.OpenAsync(FileAccessMode.Read);
+
+            mediaElementGameOver = new MediaElement();
+            mediaElementGameOver.AutoPlay = false;
+            mediaElementGameOver.SetSource(streamGameOver, fileGameOver.ContentType);
+        }
+
+       /* private async void LoadAudioMusic()
+        {
+            StorageFolder folderMusic =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile fileMusic =
+                await folderMusic.GetFileAsync("space.wav");
+            var streamMusic = await fileMusic.OpenAsync(FileAccessMode.Read);
+
+            mediaElementMusic = new MediaElement();
+            mediaElementMusic.IsLooping = true;
+            mediaElementMusic.SetSource(streamMusic, fileMusic.ContentType);
+        }*/
+
+        //game over. Screen freeze, Game Over text and Game Over sound.
         public void StopGame()
         {
             timer.Stop();
@@ -319,6 +356,7 @@ namespace AlienAttackApp
 
             MyCanvas.Children.Add(gameover);
             Window.Current.CoreWindow.KeyDown -= CoreWindow_KeyDown;
+            mediaElementGameOver.Play();
         }
 
         private void empty_Click(object sender, RoutedEventArgs e)

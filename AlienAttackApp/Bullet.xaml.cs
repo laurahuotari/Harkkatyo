@@ -37,6 +37,7 @@ namespace AlienAttackApp
             SetValue(Canvas.TopProperty, LocationY);
         }
 
+        //shoot method
         public void Shoot()
         {
             //move bullet up

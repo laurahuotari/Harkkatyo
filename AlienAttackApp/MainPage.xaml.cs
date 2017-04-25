@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -24,7 +25,8 @@ namespace AlienAttackApp
     public sealed partial class MainPage : Page
     {
 
-        
+        //music
+        private MediaElement mediaElementMusic;
 
         public MainPage()
         {
@@ -37,6 +39,9 @@ namespace AlienAttackApp
             //disable debugger info
             App.Current.DebugSettings.EnableFrameRateCounter = false;
 
+            //load music
+            LoadAudioMusic();
+
         }
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
@@ -44,9 +49,19 @@ namespace AlienAttackApp
             Frame.Navigate(typeof(GamePage));
         }
 
-        private void HSButton_Click(object sender, RoutedEventArgs e)
+        private async void LoadAudioMusic()
         {
-            Frame.Navigate(typeof(HighScore));
+            StorageFolder folderMusic =
+                await Windows.ApplicationModel.Package.Current.InstalledLocation.GetFolderAsync("Assets");
+            StorageFile fileMusic =
+                await folderMusic.GetFileAsync("space.wav");
+            var streamMusic = await fileMusic.OpenAsync(FileAccessMode.Read);
+
+            mediaElementMusic = new MediaElement();
+            mediaElementMusic.IsLooping = true;
+            mediaElementMusic.SetSource(streamMusic, fileMusic.ContentType);
         }
+        //repeat when over;
+
     }
 }
