@@ -40,9 +40,9 @@ namespace AlienAttackApp
         private int HitCount = 0;
         //game over
         private GameOver gameover;
-        //audio
+        //audio pew
         private MediaElement mediaElement;
-        //audio
+        //audio splat
         private MediaElement mediaElementSplat;
         //game over audio
         private MediaElement mediaElementGameOver;
@@ -365,6 +365,7 @@ namespace AlienAttackApp
             mediaElementMusic.Stop();
         }
 
+        //empty button, focus on this so pressing space wont direct to main page via back button
         private void empty_Click(object sender, RoutedEventArgs e)
         {
 

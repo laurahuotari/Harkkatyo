@@ -36,7 +36,6 @@ namespace AlienAttackApp
         }
 
         //navigates back to the front page (play again)
-
         private void PlayAgain_Click(object sender, RoutedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;

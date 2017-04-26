@@ -29,16 +29,9 @@ namespace AlienAttackApp
         //y location
         public double LocationY { get; set; }
 
-        //time between shooting bullets
-        public int BulletInterval { get; set; }
-        //bullet list
-        public List<Bullet> bulletList;
-
         public Player()
         {
             this.InitializeComponent();
-            bulletList = new List<Bullet>();
-            BulletInterval = 20;
         }
 
         //move left
@@ -62,11 +55,6 @@ namespace AlienAttackApp
         {
             SetValue(Canvas.LeftProperty, LocationX);
             SetValue(Canvas.TopProperty, LocationY);
-        }
-
-        internal void Focus()
-        {
-            throw new NotImplementedException();
         }
     }
 }

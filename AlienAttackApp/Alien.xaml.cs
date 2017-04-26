@@ -30,6 +30,7 @@ namespace AlienAttackApp
             this.InitializeComponent();
            
         }
+
         public void SetLocation()
         {
             SetValue(Canvas.LeftProperty, LocationX);
