@@ -51,7 +51,7 @@
                 Source="Assets/ArrowKeys.png"
                 Height="76" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="351,0,0,140" Width="117"/>
         <Image
-                Source="Assets/Space2.png" Margin="272,500,240,64"/>
+                Source="Assets/Space2.png" Margin="263,500,249,64"/>
         <TextBlock Text="Press Left and Right to move." FontFamily="Ocr a STD" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FF3ECD27" Margin="247,0,0,105"></TextBlock>
         <TextBlock Text="Press Space to shoot." FontFamily="Ocr a STD" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FF3ECD27" Margin="301,0,0,32" Height="17" Width="218"></TextBlock>
     </Grid>
