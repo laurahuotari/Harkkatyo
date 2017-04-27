@@ -353,8 +353,8 @@ namespace AlienAttackApp
             alientimer.Stop();
             gameover = new GameOver()
             {
-                LocationX = MyCanvas.Width-600,
-                LocationY = MyCanvas.Height-450
+                LocationX = MyCanvas.Width-800,
+                LocationY = MyCanvas.Height-600
             };
 
             gameover.SetLocation();

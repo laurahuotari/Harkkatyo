@@ -10,7 +10,9 @@
     d:DesignWidth="800">
 
     <Grid>
-        <TextBlock x:Name="GameOverText" Text="GAME OVER" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFB1414" FontSize="50" Width="274" Height="67"></TextBlock>
-        <Button x:Name="PlayAgain" Click="PlayAgain_Click" Content="Play Again"  Foreground="#FFFB1414" HorizontalAlignment="Center" Margin="157,189,157,79" Width="100px"></Button>
+        <TextBlock x:Name="GameOverText" Text="GAME OVER" TextAlignment="Center" FontFamily="Ocr a STD" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#FFFB1414" FontSize="60" Width="415" Height="51" Margin="196,236,189,313"></TextBlock>
+        
+        
+        <Button x:Name="PlayAgain" Click="PlayAgain_Click" Content="Play Again" FontFamily="Ocr a STD" Foreground="#FFFB1414" HorizontalAlignment="Center" Margin="334,340,334,230" Width="132"></Button>
     </Grid>
 </UserControl>

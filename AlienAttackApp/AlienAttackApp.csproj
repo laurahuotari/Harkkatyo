@@ -122,11 +122,13 @@
     <None Include="AlienAttackApp_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\arrowkeys.png" />
     <Content Include="Assets\GameOver.wav" />
     <Content Include="Assets\pew.wav" />
     <Content Include="Assets\alien.png" />
     <Content Include="Assets\alus.png" />
     <Content Include="Assets\space.wav" />
+    <Content Include="Assets\Space2.png" />
     <Content Include="Assets\splat.wav" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

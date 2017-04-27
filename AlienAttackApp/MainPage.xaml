@@ -10,8 +10,49 @@
     Height="600">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Canvas x:Name="MyCanvas" Background="Black"/>
-        <TextBlock x:Name="AATextBlock" Text="ALIEN ATTACK"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50" FontSize="50"  Foreground="#FF3ECD27"/>
-        <Button x:Name="PlayButton" Content="Play" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click"  Foreground="#FF29BD29"/>
+        <Canvas x:Name="MyCanvas" Background="Black" Margin="0,10,0,-10"/>
+        <TextBlock x:Name="AATextBlock" Text="ALIEN ATTACK" FontFamily="Ocr a STD" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="81,149,112,0" FontSize="70"  Foreground="#FF3ECD27" Width="607"/>
+        <Button x:Name="PlayButton" Content="Play" FontFamily="Ocr a STD" HorizontalAlignment="Center" VerticalAlignment="Center" Click="PlayButton_Click" FontSize="20" Foreground="#FFFB1414" Height="53" Margin="364,269,357,278" Width="79"/>
+        <Image
+                Source="Assets/alien.png" Margin="38,49,710,488" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <CompositeTransform Rotation="-10.108"/>
+            </Image.RenderTransform>
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Opacity" Value="0.7"/>
+                </Style>
+            </Image.Style>
+
+        </Image>
+        <Image
+                Source="Assets/alien.png" Margin="635,289,112,247" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <CompositeTransform Rotation="-108.411"/>
+            </Image.RenderTransform>
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image
+                Source="Assets/alien.png" Margin="206,341,531,182" RenderTransformOrigin="0.5,0.5">
+            <Image.RenderTransform>
+                <CompositeTransform Rotation="14.964"/>
+            </Image.RenderTransform>
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Image
+                Source="Assets/ArrowKeys.png"
+                Height="76" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="351,0,0,140" Width="117"/>
+        <Image
+                Source="Assets/Space2.png" Margin="272,500,240,64"/>
+        <TextBlock Text="Press Left and Right to move." FontFamily="Ocr a STD" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FF3ECD27" Margin="247,0,0,105"></TextBlock>
+        <TextBlock Text="Press Space to shoot." FontFamily="Ocr a STD" HorizontalAlignment="Left" VerticalAlignment="Bottom" Foreground="#FF3ECD27" Margin="301,0,0,32" Height="17" Width="218"></TextBlock>
     </Grid>
 </Page>

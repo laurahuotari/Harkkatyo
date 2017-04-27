@@ -11,10 +11,12 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Canvas x:Name="MyCanvas" Background="Black" Height="600" Width="800" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <TextBlock HorizontalAlignment="Center" Width="60px" Height="30px" VerticalAlignment="Top" Margin="363,20,387,0" Foreground="#FFFB1414" Text="Score:" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"></TextBlock>
-        <TextBlock x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="30px" VerticalAlignment="Top" Margin="418,20,332,0" Foreground="#FFFB1414" Text="0" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"></TextBlock>
+        <TextBlock HorizontalAlignment="Center" Width="89" Height="30px" VerticalAlignment="Top" Margin="329,20,382,0" Foreground="#FFFB1414" Text="Score:" FontFamily="Ocr a STD" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"></TextBlock>
+        <TextBlock x:Name="PlayerScore" HorizontalAlignment="Center" Width="50px" Height="30px" VerticalAlignment="Top" Margin="418,20,332,0" Foreground="#FFFB1414" Text="0" FontFamily="Ocr a STD" TextAlignment="Center" TextWrapping="Wrap" FontSize="20"></TextBlock>
         <Button x:Name="empty" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="empty_Click" Foreground="#FFFB1414"/>
-        <Button x:Name="BackButton" Content="BACK" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" Foreground="#FFFB1414"/>
-        
+        <Button x:Name="BackButton" Content="BACK" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="20" Click="BackButton_Click" FontFamily="Ocr a STD" Foreground="#FFFB1414"/>
+
     </Grid>
 </Page>
+
+
